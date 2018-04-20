@@ -5,4 +5,7 @@ nav.navbar.navbar-expand-md.navbar-light.mb-4 style="background-color:#ddeeff"
   #navbarCollapse.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
       = nav_link_to t(:'nav.home'), static_pages_home_path
-      = nav_link_to t(:'nav.about'), static_pages_about_path
+      = nav_link_to t(:'nav.bbs'), '#bbs'
+      = nav_link_to t(:'nav.manual'), '#manual'
+      = nav_link_to t(:'nav.faq'), '#faq'
+      = nav_link_to t(:'nav.sylpheed'), 'https://sylpheed.sraoss.jp/'

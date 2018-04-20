@@ -2,4 +2,8 @@ en:
   nav:
     site_name: 'Sylpheed Support'
     home: '☆Home'
+    bbs: '☆BBS'
+    manual: '☆Manual'
+    faq: '☆FAQ'
     about: '☆About'
+    sylpheed: '☆Sylpheed'

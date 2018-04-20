@@ -2,4 +2,7 @@ ja:
   nav:
     site_name: 'Sylpheed ユーザサポートサイト'
     home: '☆サポートサイトトップ'
-    about: '☆サイトについて'
+    bbs: '☆掲示板'
+    manual: '☆マニュアル'
+    faq: '☆FAQ'
+    sylpheed: '☆Sylpheedトップ'
