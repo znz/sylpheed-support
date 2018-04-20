@@ -13,6 +13,8 @@ services:
     volumes:
     - .:/app
     - bundle-cache:/usr/local/bundle
+    tmpfs:
+    - /app/tmp/pids
     ports:
     - "26906:26906"
     depends_on:
