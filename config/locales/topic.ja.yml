@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      topic: 'トピックス'
+
+    attributes:
+      topic:
+        body: '本文'
+        delete_flg: '削除フラグ'
