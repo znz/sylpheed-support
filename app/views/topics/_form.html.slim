@@ -1,0 +1,10 @@
+= simple_form_for(@topic) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :body
+    = f.input :delete_flg
+
+  .form-actions
+    = f.button :submit

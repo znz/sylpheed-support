@@ -1,0 +1,23 @@
+h1 Listing topics
+
+table
+  thead
+    tr
+      th Body
+      th Delete flg
+      th
+      th
+      th
+
+  tbody
+    - @topics.each do |topic|
+      tr
+        td = topic.body
+        td = topic.delete_flg
+        td = link_to 'Show', topic
+        td = link_to 'Edit', edit_topic_path(topic)
+        td = link_to 'Destroy', topic, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Topic', new_topic_path
