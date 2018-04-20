@@ -20,7 +20,7 @@ class TopicsControllerTest < ActionDispatch::IntegrationTest
       post topics_url, params: { topic: { body: @topic.body, delete_flg: @topic.delete_flg } }
     end
 
-    assert_redirected_to topic_url(Topic.last)
+    assert_redirected_to topic_url(Topic.order(:created_at).last)
   end
 
   test "should show topic" do
