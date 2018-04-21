@@ -13,6 +13,8 @@ p
   = link_to 'メーリングリスト', 'https://sylpheed.sraoss.jp/ja/ml.html'
   | からも行えます。
 
+= paginate @articles
+
 table.table
   thead
     tr
@@ -20,7 +22,6 @@ table.table
       th 作成者
       th = Article.human_attribute_name(:updated_at)
       th 記事数
-
 
   tbody
     - threshold = Time.current - Article::NEW_ARTICLE_TIME.hours

@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.roots
     @articles = @articles.reorder(updated_at: :asc)
-    @articles = @articles.limit(50)
+    @articles = @articles.page(params[:page])
   end
 
   # GET /articles/1
