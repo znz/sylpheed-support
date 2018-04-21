@@ -23,6 +23,20 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to article_url(Article.order(:created_at).last)
   end
 
+  test "should not create article" do
+    (2..Article::ARTICLE_MAX).each do
+      Article.create!(parent_id: @article.id, body: @article.body, mail_addr: @article.mail_addr, name: @article.name, subject: @article.subject, url: @article.url, remote_addr: @article.remote_addr)
+    end
+    @article.reload
+    assert_equal Article::ARTICLE_MAX, @article.self_and_descendants.count
+
+    assert_no_difference('Article.count') do
+      post articles_url, params: { article: { parent_id: @article.id, body: @article.body, mail_addr: @article.mail_addr, name: @article.name, subject: @article.subject, url: @article.url } }
+    end
+
+    assert_redirected_to article_url(@article)
+  end
+
   test "should show article" do
     get article_url(@article)
     assert_response :success

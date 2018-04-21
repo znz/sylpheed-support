@@ -46,11 +46,11 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.remote_addr = request.remote_ip
-    if @article.parent && !@article.parent.commentable?
-      redirect_to @article, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
-      return
-    end
     if @article.parent
+      if !@article.parent.commentable?
+        redirect_to @article.parent, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
+        return
+      end
       @article.pthread_id = @article.parent.pthread_id
       @article.article_id = @article.parent.self_and_descendants.count + 1
     else
