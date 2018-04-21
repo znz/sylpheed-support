@@ -1,6 +1,6 @@
 - if @article.parent_id?
   h2 ☆コメント投稿
-  == render @article.parent
+  == render partial: 'article', object: @article.parent, locals: { commentable: false }
 - else
   h2 ☆スレッド作成
 

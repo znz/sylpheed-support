@@ -23,10 +23,17 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
-    parent = Article.find(params[:parent_id])
-    @article.parent = parent
-    if parent.commentable?
-      redirect_to parent, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
+    parent_id = params[:parent_id]
+    if parent_id
+      parent = Article.find(parent_id)
+      @article.parent = parent
+      unless parent.commentable?
+        redirect_to parent, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
+        return
+      end
+      if parent.article_id != 1
+        @article.subject = 'Re: ' + parent.subject.sub(/\ARe: /, '')
+      end
     end
   end
 
@@ -39,8 +46,16 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.remote_addr = request.remote_ip
-    if @article.commentable?
+    unless @article.parent&.commentable?
       redirect_to @article, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
+      return
+    end
+    if @article.parent
+      @article.pthread_id = @article.parent.pthread_id
+      @article.article_id = @article.parent.self_and_descendants.count + 1
+    else
+      @article.pthread_id = Article.roots.count + 1
+      @article.article_id = 1
     end
     respond_to do |format|
       if @article.save

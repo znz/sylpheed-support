@@ -28,5 +28,5 @@
         | コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません
 
     - @article.self_and_descendants.each do |child|
-      == render partial: 'article', object: child, locals: { commentable: commentable }
+      == render partial: 'article', object: child, locals: { commentable: commentable && @article != child }
     =< link_to 'スレッド一覧へ戻る', articles_path
