@@ -19,7 +19,7 @@ table.table
       th No. スレッド名
       th 作成者
       th = Article.human_attribute_name(:updated_at)
-      th = Article.human_attribute_name(:children_count)
+      th 記事数
 
 
   tbody
@@ -32,7 +32,7 @@ table.table
             span.text-danger  ★
         td = article.name
         td = l article.updated_at
-        td.text-right = article.children_count + 0
+        td.text-right = article.self_and_descendants.count
 
 p.p-3.mb-2.bg-light.text-dark
   span.text-danger ★
