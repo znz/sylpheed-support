@@ -71,6 +71,16 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def bbs
+    h = {}
+    h[:pthread_id] = params[:pthread_id].to_i
+    article_id = params[:article_id]
+    if article_id
+      h[:article_id] = article_id.to_i
+    end
+    redirect_to Article.where(h).first
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
