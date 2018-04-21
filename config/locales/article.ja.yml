@@ -17,3 +17,7 @@ ja:
 
         parent_id: 'コメント先'
         children_count: 'コメント数'
+
+  ransack:
+    attributes:
+      pthread_id: 'No. スレッド名'

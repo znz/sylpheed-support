@@ -19,9 +19,9 @@ p
 table.table
   thead
     tr
-      th No. スレッド名
+      th = sort_link @q, :pthread_id
       th 作成者
-      th = Article.human_attribute_name(:updated_at)
+      th = sort_link @q, :updated_at
       th 記事数
 
   tbody

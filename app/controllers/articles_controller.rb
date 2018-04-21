@@ -5,8 +5,10 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.roots
-    @articles = @articles.reorder(updated_at: :desc)
+    @articles = Article.where(parent_id: nil, delete_flg: false)
+    @q = @articles.ransack(params[:q])
+    @q.sorts = 'updated_at desc' if @q.sorts.empty?
+    @articles = @q.result(distinct: true)
     @articles = @articles.page(params[:page]).per(50)
   end
 
