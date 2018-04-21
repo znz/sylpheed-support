@@ -5,12 +5,12 @@ p
   | (X Window System上で動作する電子メールクライアント&ニュースリーダ)のユーザのためのサポートサイトです。
 p 本サイトには以下のコンテンツが含まれています。
 .list-group
-  = link_to '掲示板: Sylpheedに関する掲示板', '#bbs', class: 'list-group-item list-group-item-action'
+  = link_to '掲示板: Sylpheedに関する掲示板', articles_path, class: 'list-group-item list-group-item-action'
   = link_to 'マニュアル: Sylpheedに関するフリーのマニュアル類', '#doc', class: 'list-group-item list-group-item-action'
   = link_to 'FAQ: Sylpheedに関するよくある質問と回答', '#faq', class: 'list-group-item list-group-item-action'
 p
   | 本サイトに関するご指摘、ご質問、ご要望に関しましては本サイトの
-  = link_to '掲示板', '#bbs'
+  = link_to '掲示板', articles_path
   | か、
   = link_to 'webmaster@good-day.net', 'mailto:webmaster@good-day.net'
   | までお問い合わせください。
