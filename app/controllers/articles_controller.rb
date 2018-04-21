@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.roots
+    @articles = @articles.limit(50)
   end
 
   # GET /articles/1

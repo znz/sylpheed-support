@@ -20,8 +20,6 @@
       = link_to new_article_path(parent_id: @article.id), class: 'btn btn-outline-secondary' do
         small 新規コメント投稿
 
-    == render @article
-
     - @article.self_and_descendants.each do |child|
       == render child
 
