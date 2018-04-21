@@ -6,8 +6,8 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.roots
-    @articles = @articles.reorder(updated_at: :asc)
-    @articles = @articles.page(params[:page])
+    @articles = @articles.reorder(updated_at: :desc)
+    @articles = @articles.page(params[:page]).per(50)
   end
 
   # GET /articles/1
