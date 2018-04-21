@@ -15,5 +15,6 @@
       = link_to article.mail_addr, "mailto:#{article.mail_addr}", class: 'card-link'
     - if article.url?
       = link_to article.url, article.url, class: 'card-link', rel: 'nofollow'
-    = link_to new_article_path(parent_id: article.id), class: 'card-link btn btn-outline-secondary', rel: 'nofollow' do
-      small このコメントに返信
+    - if commentable
+      = link_to new_article_path(parent_id: article.id), class: 'card-link btn btn-outline-secondary', rel: 'nofollow' do
+        small このコメントに返信

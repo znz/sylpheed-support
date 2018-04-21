@@ -11,4 +11,8 @@ class Article < ApplicationRecord
 
   NEW_ARTICLE_TIME = 24
   ARTICLE_MAX = 100
+
+  def commentable?
+    root.self_and_descendants.count < ARTICLE_MAX
+  end
 end

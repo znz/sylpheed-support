@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.roots
+    @articles = @articles.reorder(updated_at: :asc)
     @articles = @articles.limit(50)
   end
 
@@ -22,7 +23,7 @@ class ArticlesController < ApplicationController
     @article = Article.new
     parent = Article.find(params[:parent_id])
     @article.parent = parent
-    if Article::ARTICLE_MAX <= parent.root.self_and_descendants.count
+    if parent.commentable?
       redirect_to parent, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
     end
   end
@@ -36,7 +37,9 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.remote_addr = request.remote_ip
-
+    if @article.commentable?
+      redirect_to @article, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
+    end
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
