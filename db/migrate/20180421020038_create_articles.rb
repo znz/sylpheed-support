@@ -23,5 +23,7 @@ class CreateArticles < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_index :articles, %i[article_id pthread_id], unique: true
   end
 end
