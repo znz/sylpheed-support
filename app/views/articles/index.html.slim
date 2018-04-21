@@ -1,39 +1,41 @@
-h1 Listing articles
+h2 ☆掲示板
 
-table
+p
+  = link_to 'Sylpheed', 'https://sylpheed.sraoss.jp/'
+  | に関するご質問、ご要望、ご指摘等に関する掲示板です。
+p
+  | 本サイトにある
+  = link_to 'マニュアル類', '/doc.php'
+  | に関するご質問、ご要望、ご指摘等もこちらで受け付けております。
+p
+  = link_to 'Sylpheed', 'https://sylpheed.sraoss.jp/'
+  | に関するお問い合わせは
+  = link_to 'メーリングリスト', 'https://sylpheed.sraoss.jp/ja/ml.html'
+  | からも行えます。
+
+table.table
   thead
     tr
-      th Article
-      th Pthread
-      th Delete flg
-      th Password
-      th Remote addr
-      th Name
-      th Subject
-      th Body
-      th Mail addr
-      th Url
-      th
-      th
-      th
+      th = Article.human_attribute_name(:subject)
+      th = Article.human_attribute_name(:name)
+      th = Article.human_attribute_name(:updated_at)
+      th = Article.human_attribute_name(:children_count)
+
 
   tbody
+    - threshold = Time.current - Article::THRESHOLD_HOURS.hours
     - @articles.each do |article|
       tr
-        td = article.article_id
-        td = article.pthread_id
-        td = article.delete_flg
-        td = article.password
-        td = article.remote_addr
+        td = link_to article do
+          = article.subject
+          - if threshold < article.updated_at
+            span.text-danger ★
         td = article.name
-        td = article.subject
-        td = article.body
-        td = article.mail_addr
-        td = article.url
-        td = link_to 'Show', article
-        td = link_to 'Edit', edit_article_path(article)
-        td = link_to 'Destroy', article, data: { confirm: 'Are you sure?' }, method: :delete
+        td = l article.updated_at
+        td.text-right = article.children_count + 0
 
-br
+p.p-3.mb-2.bg-light.text-dark
+  span.text-danger ★
+  | は#{Article::THRESHOLD_HOURS}時間以内に投稿のあったスレッドです。
 
 = link_to 'New Article', new_article_path

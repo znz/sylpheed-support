@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      article: '記事'
+
+    attributes:
+      article:
+        article_id: '記事ID'      # 互換性のため
+        pthread_id: '親スレッドID' # 互換性のため
+        password: 'パスワード'
+        remote_addr: '書き込み元リモートホスト'
+        name: '名前'
+        subject: 'タイトル'
+        body: '本文'
+        mail_addr: 'メールアドレス'
+        url: 'URL'
+
+        parent_id: 'コメント先'
+        children_count: 'コメント数'
