@@ -4,17 +4,19 @@
   .card-body
     h5.card-title
       = '投稿者: '
-      = article.name
+      - if article.mail_addr?
+        = link_to article.name, "mailto:#{article.mail_addr}"
+      - else
+        = article.name
+      - if article.url?
+        '
+        = link_to '<HOME>', article.url, class: 'card-link', rel: 'nofollow'
     h6.card-subtitle.mb-2.text-muted
       = '投稿日時: '
       = l article.created_at
     p.card-text
       = article.body
-  .card-footer.text-right
-    - if article.mail_addr?
-      = link_to article.mail_addr, "mailto:#{article.mail_addr}", class: 'card-link'
-    - if article.url?
-      = link_to article.url, article.url, class: 'card-link', rel: 'nofollow'
-    - if commentable
+  - if commentable
+    .card-footer.text-right
       = link_to new_article_path(parent_id: article.id), class: 'card-link btn btn-outline-secondary', rel: 'nofollow' do
         small このコメントに返信
