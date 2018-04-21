@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
     parent = Article.find(params[:parent_id])
     @article.parent = parent
     if Article::ARTICLE_MAX <= parent.root.self_and_descendants.count
-      redirect_to parent, alert: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
+      redirect_to parent, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
     end
   end
 

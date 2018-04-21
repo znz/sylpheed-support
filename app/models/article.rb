@@ -9,6 +9,6 @@ class Article < ApplicationRecord
   validates :mail_addr, length: { maximum: 100 }
   validates :url, length: { maximum: 100 }
 
-  THRESHOLD_HOURS = 24
-  ARTICLE_MAX = 8
+  NEW_ARTICLE_TIME = 24
+  ARTICLE_MAX = 100
 end
