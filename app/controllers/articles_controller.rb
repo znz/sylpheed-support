@@ -46,7 +46,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.remote_addr = request.remote_ip
-    unless @article.parent&.commentable?
+    if @article.parent && !@article.parent.commentable?
       redirect_to @article, notice: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
       return
     end

@@ -17,10 +17,10 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create article" do
     assert_difference('Article.count') do
-      post articles_url, params: { article: { article_id: @article.article_id, body: @article.body, delete_flg: @article.delete_flg, mail_addr: @article.mail_addr, name: @article.name, password: @article.password, pthread_id: @article.pthread_id, remote_addr: @article.remote_addr, subject: @article.subject, url: @article.url } }
+      post articles_url, params: { article: { body: @article.body, mail_addr: @article.mail_addr, name: @article.name, subject: @article.subject, url: @article.url } }
     end
 
-    assert_redirected_to article_url(Article.last)
+    assert_redirected_to article_url(Article.order(:created_at).last)
   end
 
   test "should show article" do
