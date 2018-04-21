@@ -1,0 +1,18 @@
+= simple_form_for(@article) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :article_id
+    = f.input :pthread_id
+    = f.input :delete_flg
+    = f.input :password
+    = f.input :remote_addr
+    = f.input :name
+    = f.input :subject
+    = f.input :body
+    = f.input :mail_addr
+    = f.input :url
+
+  .form-actions
+    = f.button :submit

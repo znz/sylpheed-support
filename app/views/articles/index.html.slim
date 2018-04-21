@@ -1,0 +1,39 @@
+h1 Listing articles
+
+table
+  thead
+    tr
+      th Article
+      th Pthread
+      th Delete flg
+      th Password
+      th Remote addr
+      th Name
+      th Subject
+      th Body
+      th Mail addr
+      th Url
+      th
+      th
+      th
+
+  tbody
+    - @articles.each do |article|
+      tr
+        td = article.article_id
+        td = article.pthread_id
+        td = article.delete_flg
+        td = article.password
+        td = article.remote_addr
+        td = article.name
+        td = article.subject
+        td = article.body
+        td = article.mail_addr
+        td = article.url
+        td = link_to 'Show', article
+        td = link_to 'Edit', edit_article_path(article)
+        td = link_to 'Destroy', article, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Article', new_article_path

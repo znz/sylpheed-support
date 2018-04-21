@@ -1,0 +1,36 @@
+p#notice = notice
+
+p
+  strong Article:
+  = @article.article_id
+p
+  strong Pthread:
+  = @article.pthread_id
+p
+  strong Delete flg:
+  = @article.delete_flg
+p
+  strong Password:
+  = @article.password
+p
+  strong Remote addr:
+  = @article.remote_addr
+p
+  strong Name:
+  = @article.name
+p
+  strong Subject:
+  = @article.subject
+p
+  strong Body:
+  = @article.body
+p
+  strong Mail addr:
+  = @article.mail_addr
+p
+  strong Url:
+  = @article.url
+
+=> link_to 'Edit', edit_article_path(@article)
+'|
+=< link_to 'Back', articles_path
