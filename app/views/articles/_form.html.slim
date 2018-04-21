@@ -3,11 +3,8 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :article_id
-    = f.input :pthread_id
     = f.input :delete_flg
-    = f.input :password
-    = f.input :remote_addr
+    /= f.input :password
     = f.input :name
     = f.input :subject
     = f.input :body

@@ -10,11 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_20_155304) do
+ActiveRecord::Schema.define(version: 2018_04_21_020038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "article_id"
+    t.integer "pthread_id"
+    t.boolean "delete_flg", default: false, null: false
+    t.string "password"
+    t.inet "remote_addr", null: false
+    t.string "name", null: false
+    t.string "subject", null: false
+    t.text "body", null: false
+    t.string "mail_addr"
+    t.string "url"
+    t.uuid "parent_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
+    t.integer "depth", default: 0, null: false
+    t.integer "children_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lft"], name: "index_articles_on_lft"
+    t.index ["parent_id"], name: "index_articles_on_parent_id"
+    t.index ["rgt"], name: "index_articles_on_rgt"
+  end
 
   create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "body", null: false

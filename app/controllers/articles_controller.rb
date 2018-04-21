@@ -25,6 +25,7 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    @article.remote_addr = request.remote_ip
 
     respond_to do |format|
       if @article.save
@@ -69,6 +70,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:article_id, :pthread_id, :delete_flg, :password, :remote_addr, :name, :subject, :body, :mail_addr, :url)
+      params.require(:article).permit(:delete_flg, :password, :name, :subject, :body, :mail_addr, :url)
     end
 end

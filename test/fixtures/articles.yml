@@ -5,21 +5,25 @@ one:
   pthread_id: 1
   delete_flg: false
   password: MyString
-  remote_addr: 
+  remote_addr: "127.0.0.1"
   name: MyString
   subject: MyString
   body: MyText
   mail_addr: MyString
   url: MyString
+  lft: 1
+  rgt: 2
 
 two:
-  article_id: 1
-  pthread_id: 1
+  article_id: 2
+  pthread_id: 2
   delete_flg: false
   password: MyString
-  remote_addr: 
+  remote_addr: "::1"
   name: MyString
   subject: MyString
   body: MyText
   mail_addr: MyString
   url: MyString
+  lft: 3
+  rgt: 4
