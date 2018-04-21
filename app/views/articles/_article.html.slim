@@ -1,0 +1,19 @@
+.card.mb-3 id="id#{article.id}"
+  .card-header
+    = article.subject
+  .card-body
+    h5.card-title
+      = '投稿者: '
+      = article.name
+    h6.card-subtitle.mb-2.text-muted
+      = '投稿日時: '
+      = l article.created_at
+    p.card-text
+      = article.body
+  .card-footer.text-right
+    - if article.mail_addr?
+      = link_to article.mail_addr, "mailto:#{article.mail_addr}", class: 'card-link'
+    - if article.url?
+      = link_to article.url, article.url, class: 'card-link', rel: 'nofollow'
+    = link_to new_article_path(parent_id: article.id), class: 'card-link btn btn-outline-secondary', rel: 'nofollow' do
+      small このコメントに返信

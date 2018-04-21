@@ -1,5 +1,7 @@
-h1 New article
+- if @article.parent_id?
+  h2 ☆コメント投稿
+  == render @article.parent
+- else
+  h2 ☆スレッド作成
 
 == render 'form'
-
-= link_to 'Back', articles_path

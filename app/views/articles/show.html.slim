@@ -1,36 +1,30 @@
 p#notice = notice
 
-p
-  strong Article:
-  = @article.article_id
-p
-  strong Pthread:
-  = @article.pthread_id
-p
-  strong Delete flg:
-  = @article.delete_flg
-p
-  strong Password:
-  = @article.password
-p
-  strong Remote addr:
-  = @article.remote_addr
-p
-  strong Name:
-  = @article.name
-p
-  strong Subject:
-  = @article.subject
-p
-  strong Body:
-  = @article.body
-p
-  strong Mail addr:
-  = @article.mail_addr
-p
-  strong Url:
-  = @article.url
+.row
+  .col-12.col-md-3.col-xl-2
+    h4 コメント一覧
+    ul.list-unstyled style="overflow-x: scroll"
+      - threshold = Time.current - Article::THRESHOLD_HOURS.hours
+      - @article.self_and_descendants.each do |article|
+        li.text-nowrap
+          - if article.level > 0
+            - if threshold < article.updated_at
+              span.text-danger ★
+            - else
+              = '　'
+            = '　' * (article.level-1) + '└ '
+          = link_to article.subject, "\#id#{article.id}"
+          | : #{article.name} (#{l article.created_at})
+  .col-12.col-md-9.col-xl-8
+    h4
+      = @article.subject
+    .text-right.mb-3
+      = link_to new_article_path(parent_id: @article.id), class: 'btn btn-outline-secondary' do
+        small 新規コメント投稿
 
-=> link_to 'Edit', edit_article_path(@article)
-'|
-=< link_to 'Back', articles_path
+    == render @article
+
+    - @article.self_and_descendants.each do |child|
+      == render child
+
+    =< link_to 'スレッド一覧へ戻る', articles_path

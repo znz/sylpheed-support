@@ -1,3 +1,4 @@
+# coding: utf-8
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
@@ -10,11 +11,19 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    unless @article.root?
+      redirect_to "#{url_for(@article.root)}#id#{@article.id}"
+    end
   end
 
   # GET /articles/new
   def new
     @article = Article.new
+    parent = Article.find(params[:parent_id])
+    @article.parent = parent
+    if Article::ARTICLE_MAX <= parent.root.self_and_descendants.count
+      redirect_to parent, alert: "コメント数が#{Article::ARTICLE_MAX}を超えています。これ以上は投稿できません。"
+    end
   end
 
   # GET /articles/1/edit
@@ -70,6 +79,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:delete_flg, :password, :name, :subject, :body, :mail_addr, :url)
+      params.require(:article).permit(:parent_id, :name, :subject, :body, :mail_addr, :url)
     end
 end

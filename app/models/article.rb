@@ -10,4 +10,5 @@ class Article < ApplicationRecord
   validates :url, length: { maximum: 100 }
 
   THRESHOLD_HOURS = 24
+  ARTICLE_MAX = 8
 end
