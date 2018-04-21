@@ -16,8 +16,8 @@ p
 table.table
   thead
     tr
-      th = Article.human_attribute_name(:subject)
-      th = Article.human_attribute_name(:name)
+      th No. スレッド名
+      th 作成者
       th = Article.human_attribute_name(:updated_at)
       th = Article.human_attribute_name(:children_count)
 
@@ -27,9 +27,9 @@ table.table
     - @articles.each do |article|
       tr
         td = link_to article do
-          = article.subject
+          = "#{article.pthread_id}. #{article.subject}"
           - if threshold < article.updated_at
-            span.text-danger ★
+            span.text-danger  ★
         td = article.name
         td = l article.updated_at
         td.text-right = article.children_count + 0
