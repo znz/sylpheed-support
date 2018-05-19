@@ -32,4 +32,9 @@ class Article < ApplicationRecord
     end
     true
   end
+
+  after_save :touch_root
+  def touch_root
+    root.touch if parent_id
+  end
 end
