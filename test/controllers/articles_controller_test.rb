@@ -25,7 +25,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create article" do
     (2..Article::ARTICLE_MAX).each do
-      Article.create!(parent_id: @article.id, body: @article.body, mail_addr: @article.mail_addr, name: @article.name, subject: @article.subject, url: @article.url, remote_addr: @article.remote_addr)
+      article = Article.new(parent_id: @article.id, body: @article.body, mail_addr: @article.mail_addr, name: @article.name, subject: @article.subject, url: @article.url, remote_addr: @article.remote_addr)
+      article.set_ids
+      article.save!
     end
     @article.reload
     assert_equal Article::ARTICLE_MAX, @article.self_and_descendants.count
