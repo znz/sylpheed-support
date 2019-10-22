@@ -1,6 +1,6 @@
 require 'awesome_nested_set/version'
-if AwesomeNestedSet::VERSION != '3.1.4'
-  raise 'AwesomeNestedSet::VERSION changed'
+unless %w[3.1.4 3.2.0].include?(AwesomeNestedSet::VERSION)
+  raise "AwesomeNestedSet::VERSION changed to #{AwesomeNestedSet::VERSION}"
 end
 require 'awesome_nested_set/move'
 class CollectiveIdea::Acts::NestedSet::Move
